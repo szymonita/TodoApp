@@ -1,0 +1,70 @@
+
+<form [formGroup]="addTaskForm">
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Dodaj zadanie
+      </mat-card-title>
+    </mat-card-header>
+
+    <br>
+
+    <mat-card-content>
+      <mat-form-field class="form-style" apperance="fill">
+        <mat-label>Nazwa</mat-label>
+        <input matInput formControlName="name">
+
+        <mat-error *ngIf="name.errors?.required">
+          Nazwa zadania nie może być pusta.
+        </mat-error>
+
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field class="form-style" apperance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="Do zrobienia">Do zrobienia</mat-option>
+          <mat-option value="W toku">W toku</mat-option>
+          <mat-option value="Gotowe">Gotowe</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field class="form-style" apperance="fill">
+        <mat-label>Opis</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field class="form-style">
+        <mat-label>Deadline</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="deadline">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field class="form-style" apperance="fill">
+        <mat-label>Priorytet</mat-label>
+        <mat-select formControlName="priority">
+          <mat-option value="Niski">Niski</mat-option>
+          <mat-option value="Średni">Średni</mat-option>
+          <mat-option value="Wysoki">Wysoki</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <br>
+
+      <button mat-raised-button color="accent" (click)="addTask()">Dodaj zadanie</button>
+
+    </mat-card-content>
+  </mat-card>
+
+</form>

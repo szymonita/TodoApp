@@ -2,85 +2,18 @@
   <h1>TO DO APP</h1>
 </mat-toolbar>
 
-<br>
-<br>
+<div class="container">
 
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Dodaj zadanie</mat-card-title>
-  </mat-card-header>
+  <app-add-task-form></app-add-task-form>
 
   <br>
 
-  <mat-card-content>
-    <mat-form-field apperance="fill">
-      <mat-label>Nazwa</mat-label>
-      <input matInput>
-    </mat-form-field>
+  <app-task-list></app-task-list>
 
-    <br>
+</div>
 
-    <mat-form-field apperance="fill">
-      <mat-label>Status</mat-label>
-      <mat-select>
-        <mat-option value="Do zrobienia">Do zrobienia</mat-option>
-        <mat-option value="W toku">W toku</mat-option>
-        <mat-option value="Gotowe">Gotowe</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <br>
-
-    <mat-form-field apperance="fill">
-      <mat-label>Opis</mat-label>
-      <textarea matInput></textarea>
-    </mat-form-field>
-
-    <br>
-
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Deadline</mat-label>
-      <input matInput [matDatepicker]="picker">
-      <mat-datepicker-toggle matSuffix [for]="picker">
-      </mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-
-    <br>
-
-    <mat-form-field apperance="fill">
-      <mat-label>Priorytet</mat-label>
-      <mat-select>
-        <mat-option value="Niski">Niski</mat-option>
-        <mat-option value="Średni">Średni</mat-option>
-        <mat-option value="Wysoki">Wysoki</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <br>
-
-    <button mat-raised-button color="Primary">Dodaj zadanie</button>
-
-  </mat-card-content>
-</mat-card>
-
-<br>
-<br>
-
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Zadania</mat-card-title>
-  </mat-card-header>
-
-  <mat-card-content>
-  </mat-card-content>
-</mat-card>
-
-<br>
-<br>
-
-<mat-toolbar>
-  <h1>TO DO APP</h1>
+<mat-toolbar class="footer-style">
+  <p>Some important info.</p>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
