@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Task from '../dataModel/Task';
 import { Constants } from '../dataModel/Constants';
+import { DataService } from '../dataModel/DataService';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ErrorMessageDialog } from '../dialogs/error-message';
 
 @Component({
   selector: 'app-add-task-form',
@@ -11,8 +14,13 @@ import { Constants } from '../dataModel/Constants';
 export class AddTaskFormComponent implements OnInit {
 
   addTaskForm: FormGroup;
+  today: Date = new Date();
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private data: DataService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.addTaskForm = this.formBuilder.group({
@@ -25,30 +33,51 @@ export class AddTaskFormComponent implements OnInit {
       priority: 'Średni'
     });
 
-    //this.addTaskForm.valueChanges.subscribe(console.log())
+    this.today.setHours(0, 0, 0, 0);
   }
 
-  addTask(): Task {
+  addTask() {
+    const id: number = this.data.getTaskSource().value.length + 1;
     const name: string = this.addTaskForm.get('name').value;
     const status: Constants.State = this.addTaskForm.get('status').value;
     const description: string = this.addTaskForm.get('description').value;
     const deadline: Date = this.addTaskForm.get('deadline').value;
     const priority: Constants.Priority = this.addTaskForm.get('priority').value;
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
 
-    const newTask = new Task(
-      name,
-      status,
-      description,
-      deadline,
-      priority
-    );
-    console.log("newTask");
-    console.log(newTask);
+    /* validations */
 
-    return newTask;
+    let taskOk: boolean = true;
+    if (!name || name === "") {
+      this.openDialog("Nazwa zadania nie może być pusta.");
+      taskOk = false;
+    }
+
+    /* create new task */
+
+    if (taskOk) {
+      const newTask = new Task(
+        id,
+        name,
+        status,
+        description,
+        deadline,
+        priority
+      );
+
+      this.data.addTask(newTask);
+    }
   }
 
-  /* getters */
+  openDialog(message: string) {
+    this.dialog.open(ErrorMessageDialog, {
+      width: '250px',
+      data: { message: message }
+    });
+  }
+
+  /* form getters */
 
   get name() {
     return this.addTaskForm.get('name');

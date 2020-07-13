@@ -17,12 +17,28 @@ import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 import { TaskListComponent } from './task-list/task-list.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatListModule } from '@angular/material/list';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ToDoPipe } from './utils/to-do.pipe';
+import { InProgressPipe } from './utils/in-progress.pipe';
+import { ReadyPipe } from './utils/ready.pipe';
+
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+
+import { EditTaskDialog } from './dialogs/edit-task';
+import { ErrorMessageDialog } from './dialogs/error-message';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddTaskFormComponent,
-    TaskListComponent
+    TaskListComponent,
+    ToDoPipe,
+    InProgressPipe,
+    ReadyPipe,
+    EditTaskDialog,
+    ErrorMessageDialog
   ],
   imports: [
     BrowserModule,
@@ -36,7 +52,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatNativeDateModule,
     MatButtonModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatListModule,
+    DragDropModule,
+    MatDialogModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,18 +1,21 @@
 import { Constants } from "./Constants";
 
 export default class Task {
+  private id:           number;
   private name:         string;
   private state:        Constants.State;
   private description:  string;
   private toDate:       Date;
   private priority:     Constants.Priority;
 
-  constructor(name: string,
+  constructor(id: number,
+              name: string,
               state?: Constants.State,
               description?: string,
               toDate?: Date,
               priority?: Constants.Priority) {
 
+    this.id = id;
     this.name = name;
 
     this.state = state || null;
@@ -22,6 +25,10 @@ export default class Task {
   }
 
   /* get methods */
+
+  public getId():number {
+    return this.id;
+  }
 
   public getName():string {
     return this.name;
@@ -44,6 +51,10 @@ export default class Task {
   }
 
   /* set methods */
+  
+  public setId(id:number){
+    this.id = id;
+  }
 
   public setName(name:string) {
     this.name = name;

@@ -1,0 +1,78 @@
+<h3 mat-dialog-title>
+  Edytuj zadanie
+</h3>
+
+<div mat-dialog-content>
+
+    <form [formGroup]="editTaskForm">
+
+      <mat-card>
+
+        <mat-card-content>
+          <mat-form-field class="form-style">
+            <mat-label>Nazwa</mat-label>
+            <input matInput formControlName="name">
+
+            <mat-error *ngIf="name.errors?.required">
+              Nazwa zadania nie może być pusta.
+            </mat-error>
+
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field class="form-style" apperance="fill">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="Do zrobienia">Do zrobienia</mat-option>
+              <mat-option value="W toku">W toku</mat-option>
+              <mat-option value="Gotowe">Gotowe</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field class="form-style">
+            <mat-label>Opis</mat-label>
+            <textarea matInput formControlName="description">
+              {{ this.data.task.getDescription() }}
+            </textarea>
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field class="form-style">
+            <mat-label>Deadline</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="deadline">
+            <mat-datepicker-toggle matSuffix [for]="picker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field class="form-style" apperance="fill">
+            <mat-label>Priorytet</mat-label>
+            <mat-select formControlName="priority">
+              {{ this.data.task.getPriority() }}
+              <mat-option value="Niski">Niski</mat-option>
+              <mat-option value="Średni">Średni</mat-option>
+              <mat-option value="Wysoki">Wysoki</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <br>
+
+          <button mat-raised-button color="accent" (click)="editTask()">Zapisz zmiany</button>
+
+          <br>
+          <br>
+
+          <button mat-raised-button color="accent" (click)="closeDialog()">Zamknij okno</button>
+
+        </mat-card-content>
+      </mat-card>
+
+    </form>
+
+</div>

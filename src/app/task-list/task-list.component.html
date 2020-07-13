@@ -1,8 +1,170 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Zadania</mat-card-title>
-  </mat-card-header>
+<div class="column-container">
 
-  <mat-card-content>
-  </mat-card-content>
-</mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Do zrobienia</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <mat-list
+        id="toDoList"
+        cdkDropList
+        #toDoList="cdkDropList"
+        [cdkDropListData]="tasks | toDo"
+        [cdkDropListConnectedTo]="[inProgressList, readyList]"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let task of (tasks | toDo)" class="list-container" cdkDrag>
+
+          <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <strong>{{ task.name }}</strong>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <p>
+                <strong>Nazwa:</strong> {{ task.name }}
+              </p>
+              <p>
+                <strong>Opis:</strong> {{ task.description }}
+              </p>
+              <p>
+                <strong>Deadline:</strong> {{ task.toDate | date }}
+              </p>
+              <p>
+                <strong>Priorytet:</strong> {{ task.priority }}
+              </p>
+
+              <br>
+
+              <button mat-raised-button color="accent" (click)="editTaskItem(task)">Edytuj zadanie</button>
+
+              <br>
+              <br>
+
+              <button mat-raised-button color="accent" (click)="deleteTaskItem(task)">Usuń zadanie</button>
+
+            </mat-expansion-panel>
+
+        </div>
+      </mat-list>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>
+
+<div class="column-container">
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>W toku</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <mat-list
+        id="inProgressList"
+        cdkDropList
+        #inProgressList="cdkDropList"
+        [cdkDropListData]="tasks | inProgress"
+        [cdkDropListConnectedTo]="[toDoList, readyList]"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let task of (tasks | inProgress)" class="list-container" cdkDrag>
+
+          <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <strong>{{ task.name }}</strong>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <p>
+                <strong>Nazwa:</strong> {{ task.name }}
+              </p>
+              <p>
+                <strong>Opis:</strong> {{ task.description }}
+              </p>
+              <p>
+                <strong>Deadline:</strong> {{ task.toDate | date }}
+              </p>
+              <p>
+                <strong>Priorytet:</strong> {{ task.priority }}
+              </p>
+
+              <br>
+
+              <button mat-raised-button color="accent" (click)="editTaskItem(task)">Edytuj zadanie</button>
+
+              <br>
+              <br>
+
+              <button mat-raised-button color="accent" (click)="deleteTaskItem(task)">Usuń zadanie</button>
+
+            </mat-expansion-panel>
+
+        </div>
+      </mat-list>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>
+
+<div class="column-container">
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Gotowe</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <mat-list
+        id="readyList"
+        cdkDropList
+        #readyList="cdkDropList"
+        [cdkDropListData]="tasks | ready"
+        [cdkDropListConnectedTo]="[toDoList, inProgressList]"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let task of (tasks | ready)" class="list-container" cdkDrag>
+
+          <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <strong>{{ task.name }}</strong>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <p>
+                <strong>Nazwa:</strong> {{ task.name }}
+              </p>
+              <p>
+                <strong>Opis:</strong> {{ task.description }}
+              </p>
+              <p>
+                <strong>Deadline:</strong> {{ task.toDate | date }}
+              </p>
+              <p>
+                <strong>Priorytet:</strong> {{ task.priority }}
+              </p>
+
+              <br>
+
+              <button mat-raised-button color="accent" (click)="editTaskItem(task)">Edytuj zadanie</button>
+
+              <br>
+              <br>
+
+              <button mat-raised-button color="accent" (click)="deleteTaskItem(task)">Usuń zadanie</button>
+
+            </mat-expansion-panel>
+
+        </div>
+      </mat-list>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

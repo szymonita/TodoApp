@@ -2,7 +2,7 @@ module Constants {
 
   export enum State {
     TO_DO = "Do zrobienia",
-    IN_PROGRESS= "W toku",
+    IN_PROGRESS = "W toku",
     READY = "Gotowe"
   }
 

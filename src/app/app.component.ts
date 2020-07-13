@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from './dataModel/DataService';
 import Task from './dataModel/Task';
 
 @Component({
@@ -9,10 +10,21 @@ import Task from './dataModel/Task';
 
 export class AppComponent {
   title = 'todo-app';
-  howManyClicks: number = 0;
-  defaultTask = new Task("ma");
+  dateSortAsc: boolean = false;
+  prioritySortAsc: boolean = false;
 
-  countClick() {
-    this.howManyClicks += 1;
+  constructor(private data: DataService) { }
+
+  ngOnInit(): void {
+  }
+
+  sortByDate() {
+    this.dateSortAsc = this.dateSortAsc === true ? false : true;
+    this.data.sortByDate(this.dateSortAsc);
+  }
+
+  sortByPriority() {
+    this.prioritySortAsc = this.prioritySortAsc === true ? false : true;
+    this.data.sortByPriority(this.prioritySortAsc);
   }
 }
